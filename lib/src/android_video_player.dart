@@ -10,6 +10,20 @@ import 'package:video_player_platform_interface/video_player_platform_interface.
 
 import 'messages.g.dart';
 
+
+class CustomClass {
+  static const platform = const MethodChannel('my_plugin');
+
+  Future<void> myMethod() async {
+    try {
+      final result = await platform.invokeMethod('my_method');
+      print(result);
+    } on PlatformException catch (e) {
+      print("Failed to invoke method: '${e.message}'.");
+    }
+  }
+}
+
 /// An Android implementation of [VideoPlayerPlatform] that uses the
 /// Pigeon-generated [VideoPlayerApi].
 class AndroidVideoPlayer extends VideoPlayerPlatform {
