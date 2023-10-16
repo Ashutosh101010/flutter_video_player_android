@@ -23,9 +23,9 @@ public class MyPlugin implements FlutterPlugin, MethodCallHandler {
 
     @Override
     public void onMethodCall(MethodCall call, Result result) {
+        System.out.println("Hello From Java");
         if (call.method.equals("getPlatformVersion")) {
             result.success("Android " + android.os.Build.VERSION.RELEASE);
-            System.out.println("Hello From Java");
         } else {
             result.notImplemented();
         }
