@@ -16,7 +16,8 @@ class CustomClass {
 
   Future<void> myMethod() async {
     try {
-      final result = await platform.invokeMethod('my_method');
+      print("calling myMethod");
+      final result = await platform.invokeMethod('getPlatformVersion');
       print(result);
     } on PlatformException catch (e) {
       print("Failed to invoke method: '${e.message}'.");
