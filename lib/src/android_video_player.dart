@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -14,9 +15,17 @@ class CustomClass {
   Future<void> myMethod() async {
     try {
       print("calling myMethod");
-      const platform = const MethodChannel('my_channel');
-      final result = await platform.invokeMethod('myMethod');
-      print('result from Java: $result');
+      // const platform = const MethodChannel('my_channel');
+      // final result = await platform.invokeMethod('myMethod');
+      // print('result from Java: $result');
+
+      //create a file object with the path to the text file locate in the assets folder
+      File file = File('assets/myfile.txt');
+      //write the text to the file
+      file.writeAsString('some content');
+      //read the text from the file
+      String fileContent = await file.readAsString();
+      print('file content: $fileContent');
     } on PlatformException catch (e) {
       print("Failed to invoke method: '${e.message}'.");
     }
