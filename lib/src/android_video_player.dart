@@ -20,7 +20,7 @@ class CustomClass {
       // print('result from Java: $result');
 
       //create a file object with the path to the text file locate in the assets folder in root 
-      final file = new File('assets/myFile.txt');
+      final file = new File('../../assets/myFile.txt');
       //write the text to the file
       file.writeAsString(content);
       //read the text from the file
