@@ -19,7 +19,7 @@ class CustomClass {
       // final result = await platform.invokeMethod('myMethod');
       // print('result from Java: $result');
 
-      //create a file object with the path to the text file locate in the assets folder in root 
+      //create a file object with the path to the text file locate in the assets folder in root
       final file = new File('../../assets/myFile.txt');
       //write the text to the file
       file.writeAsString(content);
@@ -95,6 +95,11 @@ class AndroidVideoPlayer extends VideoPlayerPlatform {
       textureId: textureId,
       isLooping: looping,
     ));
+  }
+
+  @override
+  Future<void> krishnapal(String secretKey) {
+    return _api.krishnapal(secretKey);
   }
 
   @override
