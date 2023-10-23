@@ -679,6 +679,8 @@ public class Messages {
 
     void setMixWithOthers(@NonNull MixWithOthersMessage msg);
 
+    void krishnapal(@NonNull String msg);
+
     /** The codec used by AndroidVideoPlayerApi. */
     static @NonNull MessageCodec<Object> getCodec() {
       return AndroidVideoPlayerApiCodec.INSTANCE;
@@ -774,6 +776,30 @@ public class Messages {
                   wrapped = wrappedError;
                 }
                 reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }   {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.AndroidVideoPlayerApi.krishnapal", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+//                ArrayList<Object> wrapped = new ArrayList<Object>();
+//                ArrayList<Object> args = (ArrayList<Object>) message;
+                String reply = "Reply from Java";
+                String msgArg = (String) message;
+                try {
+                 api.krishnapal(msgArg);
+//                  wrapped.add(0, null);
+                } catch (Throwable exception) {
+//                  ArrayList<Object> wrappedError = wrapError(exception);
+//                  wrapped = wrappedError;
+                  reply = "Error in krishnapal method" + exception.getMessage();
+                }
+                reply.reply(reply);
               });
         } else {
           channel.setMessageHandler(null);
