@@ -43,6 +43,7 @@ final class VideoPlayer {
   private static final String FORMAT_DASH = "dash";
   private static final String FORMAT_HLS = "hls";
   private static final String FORMAT_OTHER = "other";
+  public static   String SECRET_KEY = "";
 
   private ExoPlayer exoPlayer;
 
