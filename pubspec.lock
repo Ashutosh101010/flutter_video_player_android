@@ -251,10 +251,11 @@ packages:
   video_player_platform_interface:
     dependency: "direct main"
     description:
-      name: video_player_platform_interface
-      sha256: be72301bf2c0150ab35a8c34d66e5a99de525f6de1e8d27c0672b836fe48f73a
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: e3620b5495e87934458ce27475bc2342f5de834d
+      url: "https://github.com/Ashutosh101010/flutter_secure_player_platform_interface.git"
+    source: git
     version: "6.2.1"
   watcher:
     dependency: transitive
