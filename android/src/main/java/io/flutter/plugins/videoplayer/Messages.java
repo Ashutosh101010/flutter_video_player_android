@@ -789,7 +789,7 @@ public class Messages {
               (message, reply) -> {
 //                ArrayList<Object> wrapped = new ArrayList<Object>();
 //                ArrayList<Object> args = (ArrayList<Object>) message;
-                String reply = "Reply from Java";
+                String replyMsg = "Reply from Java";
                 String msgArg = (String) message;
                 try {
                  api.krishnapal(msgArg);
@@ -797,9 +797,9 @@ public class Messages {
                 } catch (Throwable exception) {
 //                  ArrayList<Object> wrappedError = wrapError(exception);
 //                  wrapped = wrappedError;
-                  reply = "Error in krishnapal method" + exception.getMessage();
+                  replyMsg = "Error in krishnapal method" + exception.getMessage();
                 }
-                reply.reply(reply);
+                reply.reply(replyMsg);
               });
         } else {
           channel.setMessageHandler(null);
