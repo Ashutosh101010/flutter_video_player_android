@@ -178,7 +178,7 @@ public class VideoPlayerPlugin implements FlutterPlugin, AndroidVideoPlayerApi {
 
   public void krishnapal(@NonNull String arg) {
    System.out.println("krishnapal : " + arg);
-   VideoPlayer.SECRET_KEY="ghgh";
+   VideoPlayer.SECRET_KEY=arg;
   }
 
   public void setPlaybackSpeed(@NonNull PlaybackSpeedMessage arg) {
