@@ -52,7 +52,8 @@ public class DecryptionInputStream extends InputStream {
             byte[] decryptedBuffer = rsaCipher.doFinal(b, off, len);
             return decryptedBuffer[0] & 0xFF;
         } catch (Exception e) {
-            throw new IOException("Error reading and decrypting data: " + e.getMessage());
+            e.printStackTrace();
+            return 0;
         }
     }
 
