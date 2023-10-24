@@ -22,8 +22,13 @@ import io.flutter.plugins.videoplayer.Messages.PositionMessage;
 import io.flutter.plugins.videoplayer.Messages.TextureMessage;
 import io.flutter.plugins.videoplayer.Messages.VolumeMessage;
 import io.flutter.view.TextureRegistry;
+
+import java.nio.charset.StandardCharsets;
+import java.security.KeyFactory;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 import java.util.Map;
 import javax.net.ssl.HttpsURLConnection;
@@ -178,7 +183,15 @@ public class VideoPlayerPlugin implements FlutterPlugin, AndroidVideoPlayerApi {
 
   public void krishnapal(@NonNull String arg) {
    System.out.println("krishnapal : " + arg);
-   VideoPlayer.SECRET_KEY=arg;
+   try {
+
+     KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+     X509EncodedKeySpec keySpec = new X509EncodedKeySpec(arg.getBytes(StandardCharsets.UTF_8));
+     PrivateKey result = keyFactory.generatePrivate(keySpec);
+     VideoPlayer.SECRET_KEY=result;
+   } catch (Exception e) {
+    System.out.println("Exception : " + e);
+   }
   }
 
   public void setPlaybackSpeed(@NonNull PlaybackSpeedMessage arg) {

@@ -30,6 +30,8 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSource;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
 import com.google.android.exoplayer2.util.Util;
+
+import java.security.PrivateKey;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -43,7 +45,7 @@ final class VideoPlayer {
   private static final String FORMAT_DASH = "dash";
   private static final String FORMAT_HLS = "hls";
   private static final String FORMAT_OTHER = "other";
-  public static   String SECRET_KEY = "";
+  public static PrivateKey SECRET_KEY = null;
 
   private ExoPlayer exoPlayer;
 

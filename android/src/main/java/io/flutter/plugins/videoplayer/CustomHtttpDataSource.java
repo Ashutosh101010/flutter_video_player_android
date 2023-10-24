@@ -495,8 +495,8 @@ public class CustomHtttpDataSource extends BaseDataSource implements HttpDataSou
 //            return new ByteArrayInputStream(decryptedByteArray);
 
             System.out.println("decrypt stream : " + VideoPlayer.SECRET_KEY);
-
-            return inputStream;
+            InputStream decryptedInputStream = new DecryptionInputStream(inputStream, VideoPlayer.SECRET_KEY);
+            return decryptedInputStream;
         }catch (Exception e)
         {
             return inputStream;
