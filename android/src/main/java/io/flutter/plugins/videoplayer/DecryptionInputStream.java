@@ -44,7 +44,10 @@ public class DecryptionInputStream extends InputStream {
 
 
         try {
-
+            if(len<=0)
+            {
+                return 0;
+            }
 
             byte[] decryptedBuffer = rsaCipher.doFinal(b, off, len);
             return decryptedBuffer[0] & 0xFF;
