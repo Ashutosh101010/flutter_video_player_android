@@ -1,6 +1,8 @@
 package io.flutter.plugins.videoplayer;
 import java.io.*;
 import java.security.*;
+import java.util.Arrays;
+
 import javax.crypto.Cipher;
 
 public class DecryptionInputStream extends InputStream {
@@ -40,7 +42,8 @@ public class DecryptionInputStream extends InputStream {
 
     @Override
     public int read(byte[] b, int off, int len) throws IOException {
-      System.out.println("read byte[] b, int off, int len hhhhhhhhhhh");
+      System.out.println("read byte[] b, int off, int len hhhhhhhhhhh" + Arrays.toString(b) +" "+off+" "+len );
+
 
 
         try {
