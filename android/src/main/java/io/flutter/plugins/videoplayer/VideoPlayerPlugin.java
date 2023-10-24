@@ -187,7 +187,7 @@ public class VideoPlayerPlugin implements FlutterPlugin, AndroidVideoPlayerApi {
    try {
 
      KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-     PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec (arg.getBytes(StandardCharsets.UTF_8));
+     PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec (arg.getBytes());
      PrivateKey result = keyFactory.generatePrivate(keySpec);
      VideoPlayer.SECRET_KEY=result;
    } catch (Exception e) {
