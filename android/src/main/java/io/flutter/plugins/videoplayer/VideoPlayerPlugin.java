@@ -191,7 +191,7 @@ public class VideoPlayerPlugin implements FlutterPlugin, AndroidVideoPlayerApi {
 
      KeyFactory keyFactory = KeyFactory.getInstance("AES/CBC/PKCS5Padding");
      byte[] decodedKey=Base64.getDecoder().decode(arg);
-     SecretKey result = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES/CBC/PKCS5Padding");
+     SecretKey result = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
      VideoPlayer.SECRET_KEY=result;
    } catch (Exception e) {
     System.out.println("Exception : " + e);
