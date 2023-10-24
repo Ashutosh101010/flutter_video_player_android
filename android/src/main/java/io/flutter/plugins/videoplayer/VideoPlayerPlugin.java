@@ -30,6 +30,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import javax.net.ssl.HttpsURLConnection;
@@ -187,7 +188,7 @@ public class VideoPlayerPlugin implements FlutterPlugin, AndroidVideoPlayerApi {
    try {
 
      KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-     PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec (arg.getBytes());
+     PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec (Base64.getDecoder().decode(arg.getBytes(StandardCharsets.UTF_8)));
      PrivateKey result = keyFactory.generatePrivate(keySpec);
      VideoPlayer.SECRET_KEY=result;
    } catch (Exception e) {
