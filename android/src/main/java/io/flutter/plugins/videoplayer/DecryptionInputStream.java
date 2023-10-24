@@ -44,7 +44,7 @@ public class DecryptionInputStream extends InputStream {
 
 
         try {
-            if(len<=0)
+            if(b.length<=0)
             {
                 return 0;
             }
