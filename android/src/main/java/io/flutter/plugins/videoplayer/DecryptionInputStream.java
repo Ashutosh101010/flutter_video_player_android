@@ -41,12 +41,29 @@ public class DecryptionInputStream extends InputStream {
     @Override
     public int read(byte[] b, int off, int len) throws IOException {
       System.out.println("read byte[] b, int off, int len");
-      return 0;
+
+
+        try {
+
+
+            byte[] decryptedBuffer = rsaCipher.doFinal(b, off, len);
+            return decryptedBuffer[0] & 0xFF;
+        } catch (Exception e) {
+            throw new IOException("Error reading and decrypting data: " + e.getMessage());
+        }
     }
 
     @Override
     public int read(byte[] b) throws IOException {
       System.out.println("read byte[] b");
-      return 0;
+
+        try {
+
+
+            byte[] decryptedBuffer = rsaCipher.doFinal(b);
+            return decryptedBuffer[0] & 0xFF;
+        } catch (Exception e) {
+            throw new IOException("Error reading and decrypting data: " + e.getMessage());
+        }
     }
 }
