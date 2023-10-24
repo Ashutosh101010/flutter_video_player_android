@@ -33,6 +33,8 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import javax.net.ssl.HttpsURLConnection;
 
 /** Android platform implementation of the VideoPlayerPlugin. */
@@ -187,9 +189,9 @@ public class VideoPlayerPlugin implements FlutterPlugin, AndroidVideoPlayerApi {
    System.out.println("krishnapal : " + arg);
    try {
 
-     KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-     PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec (Base64.getDecoder().decode(arg.getBytes(StandardCharsets.UTF_8)));
-     PrivateKey result = keyFactory.generatePrivate(keySpec);
+     KeyFactory keyFactory = KeyFactory.getInstance("AES/CBC/PKCS5Padding");
+     byte[] decodedKey=Base64.getDecoder().decode(arg);
+     SecretKey result = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES/CBC/PKCS5Padding");
      VideoPlayer.SECRET_KEY=result;
    } catch (Exception e) {
     System.out.println("Exception : " + e);

@@ -4,17 +4,18 @@ import java.security.*;
 import java.util.Arrays;
 
 import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
 
 public class DecryptionInputStream extends InputStream {
     private InputStream encryptedInputStream;
-    private Cipher rsaCipher;
+    private Cipher cipher;
     private byte[] buffer;
     private int bytesRead;
 
-    public DecryptionInputStream(InputStream encryptedInputStream, PrivateKey privateKey) throws Exception {
+    public DecryptionInputStream(InputStream encryptedInputStream, SecretKey privateKey) throws Exception {
         this.encryptedInputStream = encryptedInputStream;
-        this.rsaCipher = Cipher.getInstance("RSA");
-        this.rsaCipher.init(Cipher.DECRYPT_MODE, privateKey);
+        this.cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        this.cipher.init(Cipher.DECRYPT_MODE, privateKey);
         this.buffer = new byte[128]; // Adjust this buffer size as needed
         this.bytesRead = -1;
     }
@@ -33,7 +34,7 @@ public class DecryptionInputStream extends InputStream {
                 return -1; // End of stream
             }
 
-            byte[] decryptedBuffer = rsaCipher.doFinal(buffer, 0, bytesRead);
+            byte[] decryptedBuffer = cipher.doFinal(buffer, 0, bytesRead);
             return decryptedBuffer[0] & 0xFF;
         } catch (Exception e) {
             throw new IOException("Error reading and decrypting data: " + e.getMessage());
@@ -44,15 +45,8 @@ public class DecryptionInputStream extends InputStream {
     public int read(byte[] b, int off, int len) throws IOException {
       System.out.println("read byte[] b, int off, int len hhhhhhhhhhh" + Arrays.toString(b) +" "+off+" "+len );
 
-
-
         try {
-            if(b.length<=0)
-            {
-                return 0;
-            }
-
-            byte[] decryptedBuffer = rsaCipher.doFinal(b, off, len);
+            byte[] decryptedBuffer = cipher.doFinal(b, off, len);
             return decryptedBuffer[0] & 0xFF;
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,7 +61,7 @@ public class DecryptionInputStream extends InputStream {
         try {
 
 
-            byte[] decryptedBuffer = rsaCipher.doFinal(b);
+            byte[] decryptedBuffer = cipher.doFinal(b);
             return decryptedBuffer[0] & 0xFF;
         } catch (Exception e) {
             throw new IOException("Error reading and decrypting data: " + e.getMessage());

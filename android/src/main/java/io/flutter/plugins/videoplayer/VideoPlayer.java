@@ -40,12 +40,14 @@ import java.util.Map;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.view.TextureRegistry;
 
+import javax.crypto.SecretKey;
+
 final class VideoPlayer {
   private static final String FORMAT_SS = "ss";
   private static final String FORMAT_DASH = "dash";
   private static final String FORMAT_HLS = "hls";
   private static final String FORMAT_OTHER = "other";
-  public static PrivateKey SECRET_KEY = null;
+  public static SecretKey SECRET_KEY = null;
 
   private ExoPlayer exoPlayer;
 
