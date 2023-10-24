@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 
 public class DecryptionInputStream extends InputStream {
     private InputStream encryptedInputStream;
@@ -15,7 +16,8 @@ public class DecryptionInputStream extends InputStream {
     public DecryptionInputStream(InputStream encryptedInputStream, SecretKey privateKey) throws Exception {
         this.encryptedInputStream = encryptedInputStream;
         this.cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        this.cipher.init(Cipher.DECRYPT_MODE, privateKey);
+        IvParameterSpec ivParameterSpec = new IvParameterSpec("123456789ABCDEFG".getBytes());
+        this.cipher.init(Cipher.DECRYPT_MODE, privateKey,ivParameterSpec);
         this.buffer = new byte[128]; // Adjust this buffer size as needed
         this.bytesRead = -1;
     }
