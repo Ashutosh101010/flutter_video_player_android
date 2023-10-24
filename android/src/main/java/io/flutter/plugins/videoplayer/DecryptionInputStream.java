@@ -1,5 +1,6 @@
 package io.flutter.plugins.videoplayer;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.util.Arrays;
 
@@ -16,7 +17,7 @@ public class DecryptionInputStream extends InputStream {
     public DecryptionInputStream(InputStream encryptedInputStream, SecretKey privateKey) throws Exception {
         this.encryptedInputStream = encryptedInputStream;
         this.cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        IvParameterSpec ivParameterSpec = new IvParameterSpec("123456789ABCDEFG".getBytes());
+        IvParameterSpec ivParameterSpec = new IvParameterSpec("123456789ABCDEFG".getBytes(StandardCharsets.UTF_8));
         this.cipher.init(Cipher.DECRYPT_MODE, privateKey,ivParameterSpec);
         this.buffer = new byte[128]; // Adjust this buffer size as needed
         this.bytesRead = -1;
