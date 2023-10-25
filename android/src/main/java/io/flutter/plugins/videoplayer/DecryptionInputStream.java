@@ -52,8 +52,8 @@ public class DecryptionInputStream extends InputStream {
 
         try {
             byte[] decryptedBuffer = cipher.doFinal(b, off, len);
-            System.out.println(encryptedInputStream.read(decryptedBuffer));
-            return encryptedInputStream.read(decryptedBuffer);
+            System.out.println(decryptedBuffer[0] & 0xFF);
+            return decryptedBuffer[0] & 0xFF;
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
