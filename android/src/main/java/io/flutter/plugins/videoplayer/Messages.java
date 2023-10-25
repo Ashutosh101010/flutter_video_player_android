@@ -679,7 +679,7 @@ public class Messages {
 
     void setMixWithOthers(@NonNull MixWithOthersMessage msg);
 
-    void krishnapal(@NonNull String msg);
+    void setSecretKey(@NonNull String msg);
 
     /** The codec used by AndroidVideoPlayerApi. */
     static @NonNull MessageCodec<Object> getCodec() {
