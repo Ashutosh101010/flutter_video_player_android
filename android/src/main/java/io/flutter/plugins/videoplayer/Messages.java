@@ -783,21 +783,16 @@ public class Messages {
       }   {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.AndroidVideoPlayerApi.krishnapal", getCodec());
+                binaryMessenger, "dev.flutter.pigeon.AndroidVideoPlayerApi.setSecretKey", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
-//                ArrayList<Object> wrapped = new ArrayList<Object>();
-//                ArrayList<Object> args = (ArrayList<Object>) message;
                 String replyMsg = "Reply from Java";
                 String msgArg = (String) message;
                 try {
-                 api.krishnapal(msgArg);
-//                  wrapped.add(0, null);
+                 api.setSecretKey(msgArg);
                 } catch (Throwable exception) {
-//                  ArrayList<Object> wrappedError = wrapError(exception);
-//                  wrapped = wrappedError;
-                  replyMsg = "Error in krishnapal method" + exception.getMessage();
+                  replyMsg = "Error in setSecretKey method" + exception.getMessage();
                 }
                 reply.reply(replyMsg);
               });

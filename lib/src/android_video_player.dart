@@ -11,26 +11,7 @@ import 'package:video_player_platform_interface/video_player_platform_interface.
 
 import 'messages.g.dart';
 
-class CustomClass {
-  Future<void> myMethod(String content) async {
-    try {
-      print("calling myMethod");
-      // const platform = const MethodChannel('my_channel');
-      // final result = await platform.invokeMethod('myMethod');
-      // print('result from Java: $result');
 
-      //create a file object with the path to the text file locate in the assets folder in root
-      final file = new File('../../assets/myFile.txt');
-      //write the text to the file
-      file.writeAsString(content);
-      //read the text from the file
-      String fileContent = await file.readAsString();
-      print('file content: $fileContent');
-    } on PlatformException catch (e) {
-      print("Failed to invoke method: '${e.message}'.");
-    }
-  }
-}
 
 /// An Android implementation of [VideoPlayerPlatform] that uses the
 /// Pigeon-generated [VideoPlayerApi].
@@ -98,8 +79,8 @@ class AndroidVideoPlayer extends VideoPlayerPlatform {
   }
 
   @override
-  Future<void> krishnapal(String secretKey) {
-    return _api.krishnapal(secretKey);
+  Future<void> setSecretKey(String secretKey) {
+    return _api.setSecretKey(secretKey);
   }
 
   @override

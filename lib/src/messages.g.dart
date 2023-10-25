@@ -341,8 +341,8 @@ class AndroidVideoPlayerApi {
     }
   }
 
-  Future<void> krishnapal(String secretKey) async {
-    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>('dev.flutter.pigeon.AndroidVideoPlayerApi.krishnapal', codec, binaryMessenger: _binaryMessenger);
+  Future<void> setSecretKey(String secretKey) async {
+    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>('dev.flutter.pigeon.AndroidVideoPlayerApi.setSecretKey', codec, binaryMessenger: _binaryMessenger);
     final String? replyList = await channel.send(secretKey) as String?;
     if (replyList == null) {
       throw PlatformException(
