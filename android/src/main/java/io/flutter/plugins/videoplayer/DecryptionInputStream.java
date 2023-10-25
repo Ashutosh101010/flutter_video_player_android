@@ -47,7 +47,7 @@ public class DecryptionInputStream extends InputStream {
 
     @Override
     public int read(byte[] b, int off, int len) throws IOException {
-      System.out.println("read byte[] b, int off, int len hhhhhhhhhhh" +" "+off+" "+len );
+      System.out.println("read byte[] b, int off, int len hhhhhhhhhhh" +" "+b.length+off+" "+len );
 
         try {
             byte[] decryptedBuffer = cipher.doFinal(b, off, len);
