@@ -175,6 +175,7 @@ public class VideoPlayerPlugin implements FlutterPlugin, AndroidVideoPlayerApi {
     }
 
     public void dispose(@NonNull TextureMessage arg) {
+        VideoPlayer.SECRET_KEY = null;
         VideoPlayer player = videoPlayers.get(arg.getTextureId());
         player.dispose();
         videoPlayers.remove(arg.getTextureId());
