@@ -5,6 +5,7 @@ import java.security.*;
 import java.util.Arrays;
 
 import javax.crypto.Cipher;
+import javax.crypto.CipherOutputStream;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
@@ -36,7 +37,7 @@ public class DecryptionInputStream extends InputStream {
             if (bytesRead == -1) {
                 return -1; // End of stream
             }
-
+            ;
             byte[] decryptedBuffer = cipher.doFinal(buffer, 0, bytesRead);
 
             System.out.println(decryptedBuffer[0] & 0xFF);
@@ -52,8 +53,6 @@ public class DecryptionInputStream extends InputStream {
 
         try {
             byte[] decryptedBuffer = cipher.doFinal(b, off, len);
-            System.out.println(decryptedBuffer[0] & 0xFF);
-            System.out.println(encryptedInputStream.read(b,off,len));
             return decryptedBuffer[0] & 0xFF;
         } catch (Exception e) {
             e.printStackTrace();

@@ -52,12 +52,15 @@ import java.util.zip.GZIPInputStream;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class CustomHtttpDataSource extends BaseDataSource implements HttpDataSource {
+
+
 
     public static final class Factory implements HttpDataSource.Factory {
 
@@ -72,11 +75,16 @@ public class CustomHtttpDataSource extends BaseDataSource implements HttpDataSou
         private boolean allowCrossProtocolRedirects;
         private boolean keepPostFor302Redirects;
 
+        Cipher cipher ;
+        IvParameterSpec ivParameterSpec = new IvParameterSpec("123456789ABCDEFG".getBytes(StandardCharsets.UTF_8));
+
         /** Creates an instance. */
         public Factory() {
             defaultRequestProperties = new RequestProperties();
             connectTimeoutMs = DEFAULT_CONNECT_TIMEOUT_MILLIS;
             readTimeoutMs = DEFAULT_READ_TIMEOUT_MILLIS;
+
+
         }
 
         @CanIgnoreReturnValue
@@ -471,6 +479,9 @@ public class CustomHtttpDataSource extends BaseDataSource implements HttpDataSou
         return bytesToRead;
     }
 
+
+
+
     public InputStream decryptStream(InputStream inputStream)  {
         try {
 //            final String key = "aesEncryptionKey";
@@ -495,8 +506,12 @@ public class CustomHtttpDataSource extends BaseDataSource implements HttpDataSou
 //            return new ByteArrayInputStream(decryptedByteArray);
 
             System.out.println("decrypt stream : " + VideoPlayer.SECRET_KEY);
-            DecryptionInputStream decryptedInputStream = new DecryptionInputStream(inputStream, VideoPlayer.SECRET_KEY);
-            return decryptedInputStream;
+//            DecryptionInputStream decryptedInputStream = new DecryptionInputStream(inputStream, VideoPlayer.SECRET_KEY);
+            Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding");
+            IvParameterSpec ivParameterSpec = new IvParameterSpec("123456789ABCDEFG".getBytes(StandardCharsets.UTF_8));
+            cipher.init(Cipher.DECRYPT_MODE, VideoPlayer.SECRET_KEY,ivParameterSpec);
+            CipherInputStream cipherInputStream=new CipherInputStream(inputStream,cipher);
+            return cipherInputStream;
         }catch (Exception e)
         {
             e.printStackTrace();
