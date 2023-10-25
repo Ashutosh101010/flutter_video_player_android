@@ -38,6 +38,7 @@ public class DecryptionInputStream extends InputStream {
             }
 
             byte[] decryptedBuffer = cipher.doFinal(buffer, 0, bytesRead);
+            System.out.println(decryptedBuffer[0] & 0xFF);
             return decryptedBuffer[0] & 0xFF;
         } catch (Exception e) {
             throw new IOException("Error reading and decrypting data: " + e.getMessage());
