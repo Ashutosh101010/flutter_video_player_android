@@ -284,7 +284,7 @@ public class CustomHtttpDataSource extends BaseDataSource implements HttpDataSou
                 /* contentTypePredicate= */ null,
                 /* keepPostFor302Redirects= */ false);
     }
-
+    private Cipher cipher;
     private CustomHtttpDataSource(
             @Nullable String userAgent,
             int connectTimeoutMillis,
@@ -302,6 +302,15 @@ public class CustomHtttpDataSource extends BaseDataSource implements HttpDataSou
         this.contentTypePredicate = contentTypePredicate;
         this.requestProperties = new RequestProperties();
         this.keepPostFor302Redirects = keepPostFor302Redirects;
+        try {
+            this.cipher = Cipher.getInstance("AES/CTR/NoPadding");
+
+        IvParameterSpec ivParameterSpec = new IvParameterSpec("123456789ABCDEFG".getBytes(StandardCharsets.UTF_8));
+        this.cipher.init(Cipher.DECRYPT_MODE, VideoPlayer.SECRET_KEY,ivParameterSpec);
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
+//
     }
 
     /**
@@ -483,40 +492,8 @@ public class CustomHtttpDataSource extends BaseDataSource implements HttpDataSou
 
 
     public InputStream decryptStream(InputStream inputStream)  {
-        try {
-//            final String key = "aesEncryptionKey";
-//            final String initVector = "encryptionIntVec";
-//
-//            byte[] encrytToDecryptByteArray = new byte[inputStream.available()];
-//            inputStream.read(encrytToDecryptByteArray);
-//
-//
-//            IvParameterSpec iv = null;
-//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-//                iv = new IvParameterSpec(initVector.getBytes(StandardCharsets.UTF_8));
-//            }
-//            SecretKeySpec secretkey = null;
-//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-//                secretkey = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
-//            }
-//
-//            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-//            cipher.init(Cipher.DECRYPT_MODE, secretkey, iv);
-//            byte[] decryptedByteArray = cipher.doFinal(encrytToDecryptByteArray);
-//            return new ByteArrayInputStream(decryptedByteArray);
-
-            System.out.println("decrypt stream : " + VideoPlayer.SECRET_KEY);
-//            DecryptionInputStream decryptedInputStream = new DecryptionInputStream(inputStream, VideoPlayer.SECRET_KEY);
-            Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding");
-            IvParameterSpec ivParameterSpec = new IvParameterSpec("123456789ABCDEFG".getBytes(StandardCharsets.UTF_8));
-            cipher.init(Cipher.DECRYPT_MODE, VideoPlayer.SECRET_KEY,ivParameterSpec);
-            CipherInputStream cipherInputStream=new CipherInputStream(inputStream,cipher);
+           CipherInputStream cipherInputStream=new CipherInputStream(inputStream,cipher);
             return cipherInputStream;
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-            return inputStream;
-        }
     }
     @Override
     public int read(byte[] buffer, int offset, int length) throws HttpDataSourceException {
