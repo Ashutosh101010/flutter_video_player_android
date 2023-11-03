@@ -31,7 +31,7 @@ android {
     if (project.android.hasProperty("namespace")) {
         namespace 'io.flutter.plugins.videoplayer'
     }
-    compileSdkVersion 32
+    compileSdk 32
 
     defaultConfig {
         minSdkVersion 26
@@ -78,4 +78,6 @@ dependencies {
     implementation 'org.jetbrains:annotations:24.0.1'
     implementation 'com.google.errorprone:error_prone_annotations:2.22.0'
     implementation "androidx.annotation:annotation:1.7.0"
+    implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.9'
+    implementation 'org.checkerframework:checker-qual:3.21.3'
 }

@@ -54,7 +54,7 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
  * <p>Note that the built-in extractor for FLV streams does not support seeking.
  */
 public final class CustomProgressiveMediaSource extends BaseMediaSource
-        implements ProgressiveMediaPeriod.Listener {
+        implements CustomProgressiveMediaPeriod.Listener {
 
     /** Factory for {@link CustomProgressiveMediaSource}s. */
     @SuppressWarnings("deprecation") // Implement deprecated type for backwards compatibility.
@@ -300,7 +300,7 @@ public final class CustomProgressiveMediaSource extends BaseMediaSource
         if (transferListener != null) {
             dataSource.addTransferListener(transferListener);
         }
-        return new ProgressiveMediaPeriod(
+        return new CustomProgressiveMediaPeriod(
                 localConfiguration.uri,
                 dataSource,
                 progressiveMediaExtractorFactory.createProgressiveMediaExtractor(getPlayerId()),
@@ -316,7 +316,7 @@ public final class CustomProgressiveMediaSource extends BaseMediaSource
 
     @Override
     public void releasePeriod(MediaPeriod mediaPeriod) {
-        ((ProgressiveMediaPeriod) mediaPeriod).release();
+        ((CustomProgressiveMediaPeriod) mediaPeriod).release();
     }
 
     @Override
