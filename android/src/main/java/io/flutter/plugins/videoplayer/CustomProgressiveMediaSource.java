@@ -19,7 +19,9 @@ import static com.google.android.exoplayer2.util.Assertions.checkNotNull;
 
 import android.net.Uri;
 import android.os.Looper;
+
 import androidx.annotation.Nullable;
+
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.Timeline;
@@ -30,6 +32,7 @@ import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.extractor.Extractor;
 import com.google.android.exoplayer2.extractor.ExtractorsFactory;
 import com.google.android.exoplayer2.source.BaseMediaSource;
+import com.google.android.exoplayer2.source.BundledExtractorsAdapter;
 import com.google.android.exoplayer2.source.ForwardingTimeline;
 import com.google.android.exoplayer2.source.MediaPeriod;
 import com.google.android.exoplayer2.source.MediaSourceFactory;
